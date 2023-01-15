@@ -1,0 +1,12 @@
+pg:
+  host: hostname
+  name: database name
+  user: username
+  pass: password
+redis:
+  host: hostname
+  pass: password
+auth:
+  secret_key: generate me pls
+server:
+  port: 8000

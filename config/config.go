@@ -1,33 +1,21 @@
 package config
 
 import (
-	"log"
-	"path/filepath"
-
 	"github.com/spf13/viper"
+	"log"
 )
 
 var config *viper.Viper
 
-// Init is an exported method that takes the environment starts the viper
-// (external lib) and returns the configuration struct.
-func Init(env string) {
-	var err error
+func Init(configName string) {
 	config = viper.New()
-	config.SetConfigType("yaml")
-	config.SetConfigName(env)
+	config.SetConfigType("yml")
+	config.SetConfigName(configName)
 	config.AddConfigPath("../config/")
 	config.AddConfigPath("config/")
-	err = config.ReadInConfig()
+	err := config.ReadInConfig()
 	if err != nil {
 		log.Fatal("error on parsing configuration file")
-	}
-}
-
-func relativePath(basedir string, path *string) {
-	p := *path
-	if len(p) > 0 && p[0] != '/' {
-		*path = filepath.Join(basedir, p)
 	}
 }
 

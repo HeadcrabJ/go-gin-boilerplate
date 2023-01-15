@@ -1,23 +1,22 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"os"
-
-	"github.com/vsouza/go-gin-boilerplate/config"
-	"github.com/vsouza/go-gin-boilerplate/db"
-	"github.com/vsouza/go-gin-boilerplate/server"
+	"github.com/HeadcrabJ/go-gin-boilerplate/config"
+	"github.com/HeadcrabJ/go-gin-boilerplate/db"
+	"github.com/HeadcrabJ/go-gin-boilerplate/middlewares"
+	"github.com/HeadcrabJ/go-gin-boilerplate/server"
 )
 
 func main() {
-	environment := flag.String("e", "development", "")
-	flag.Usage = func() {
-		fmt.Println("Usage: server -e {mode}")
-		os.Exit(1)
-	}
-	flag.Parse()
-	config.Init(*environment)
-	db.Init()
+	// Generate docs (swag init) and uncomment line below
+	// docs.SwaggerInfo.BasePath = "/"
+
+	config.Init("dev")
+
+	db.InitDB()
+	db.InitRedis()
+
+	middlewares.InitJWT()
+
 	server.Init()
 }

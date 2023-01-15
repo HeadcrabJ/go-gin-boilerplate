@@ -9,17 +9,15 @@ Supports multiple configuration environments.
 
 ```
 .
-├── README.md
-├── LICENSE
 ├── config
 │   ├── config.go
-│   ├── development.yaml
-│   ├── production.yaml
-│   └── test.yaml
+│   ├── dev.yml
+│   └── production.yml
 ├── controllers
 │   └── user.go
 ├── db
-│   └── db.go
+│   ├── db.go
+│   └── redis.go
 ├── main.go
 ├── middlewares
 │   └── auth.go

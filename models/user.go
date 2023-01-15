@@ -1,19 +1,25 @@
 package models
 
-type User struct {
-	ID        string `json:"user_id,omitempty"`
-	Name      string `json:"name"`
-	BirthDay  string `json:"birthday"`
-	Gender    string `json:"gender"`
-	PhotoURL  string `json:"photo_url"`
-	Time      int64  `json:"current_time"`
-	Active    bool   `json:"active,omitempty"`
-	UpdatedAt int64  `json:"updated_at,omitempty"`
+type Login struct {
+	Tel      string `json:"tel"`
+	Password string `json:"password"`
 }
 
-type UserSignup struct {
-	Name     string `json:"name" binding:"required"`
-	BirthDay string `json:"birthday" binding:"required"`
-	Gender   string `json:"gender" binding:"required"`
-	PhotoURL string `json:"photo_url" binding:"required"`
+type UserRes struct {
+	ID         uint   `json:"id"`
+	FirstName  string `json:"firstName"`
+	LastName   string `json:"lastName"`
+	Patronymic string `json:"patronymic"`
+	Tel        string `json:"tel"`
+	Email      string `json:"email"`
+}
+
+type User struct {
+	ID         uint `gorm:"primaryKey"`
+	FirstName  string
+	LastName   string
+	Patronymic string
+	Tel        string
+	Email      string
+	Password   string
 }

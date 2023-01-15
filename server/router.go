@@ -1,29 +1,34 @@
 package server
 
 import (
+	"github.com/HeadcrabJ/go-gin-boilerplate/controllers"
+	"github.com/HeadcrabJ/go-gin-boilerplate/middlewares"
 	"github.com/gin-gonic/gin"
-	"github.com/vsouza/go-gin-boilerplate/controllers"
-	"github.com/vsouza/go-gin-boilerplate/middlewares"
+	files "github.com/swaggo/files"
+	swagger "github.com/swaggo/gin-swagger"
 )
 
 func NewRouter() *gin.Engine {
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.Use(gin.Recovery())
+	r := gin.Default()
 
-	health := new(controllers.HealthController)
+	usersController := new(controllers.UsersController)
+	healthController := new(controllers.HealthController)
+	authMiddleware := middlewares.GetJWT()
 
-	router.GET("/health", health.Status)
-	router.Use(middlewares.AuthMiddleware())
-
-	v1 := router.Group("v1")
+	authGroup := r.Group("/auth")
 	{
-		userGroup := v1.Group("user")
-		{
-			user := new(controllers.UserController)
-			userGroup.GET("/:id", user.Retrieve)
-		}
+		authGroup.POST("/authorize", authMiddleware.LoginHandler)
+		authGroup.GET("/refresh", authMiddleware.RefreshHandler)
 	}
-	return router
 
+	userGroup := r.Group("usersController")
+	{
+		userGroup.GET("/:id", usersController.Retrieve)
+	}
+
+	r.GET("/healthController", healthController.Status)
+
+	r.GET("/swagger/*any", swagger.WrapHandler(files.Handler))
+
+	return r
 }
