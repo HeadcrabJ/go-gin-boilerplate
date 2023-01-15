@@ -1,9 +1,9 @@
 # Go Gin Boilerplate
-> A starter project with Golang, Gin, Gin-JWT, PostgreSQL and Redis
+> A starter project with Golang, Gin, JWT authentication, Swagger, PostgreSQL and Redis
 
 ![License](https://img.shields.io/github/license/HeadcrabJ/go-gin-boilerplate)
 
-Golang Gin boilerplate with JWT authentication, PostgreSQL and Redis. Supports multiple configuration environments.
+Supports multiple configuration environments.
 
 ### Boilerplate structure
 
