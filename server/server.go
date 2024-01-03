@@ -1,11 +1,15 @@
 package server
 
 import (
-	"github.com/HeadcrabJ/go-gin-boilerplate/config"
+	"github.com/dajeo/go-gin-boilerplate/config"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+	"io"
 )
 
-func Init() {
+func Run() {
+	gin.DefaultWriter = io.Discard
+
 	r := NewRouter()
 
 	// See this before deploy to production
@@ -17,7 +21,7 @@ func Init() {
 
 	r.Use(cors.Default()) // Configure before production
 
-	err := r.Run(":" + config.GetConfig().GetString("server.port"))
+	err := r.Run(":" + config.Get().GetString("server.port"))
 	if err != nil {
 		return
 	}

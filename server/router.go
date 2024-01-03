@@ -1,8 +1,8 @@
 package server
 
 import (
-	"github.com/HeadcrabJ/go-gin-boilerplate/controllers"
-	"github.com/HeadcrabJ/go-gin-boilerplate/middlewares"
+	"github.com/dajeo/go-gin-boilerplate/controllers"
+	"github.com/dajeo/go-gin-boilerplate/middlewares"
 	"github.com/gin-gonic/gin"
 	files "github.com/swaggo/files"
 	swagger "github.com/swaggo/gin-swagger"

@@ -1,7 +1,8 @@
 package db
 
 import (
-	"github.com/HeadcrabJ/go-gin-boilerplate/config"
+	"github.com/dajeo/go-gin-boilerplate/config"
+	"github.com/rs/zerolog/log"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -9,20 +10,22 @@ import (
 
 var db *gorm.DB
 
-func InitDB() {
-	c := config.GetConfig()
+func Init() {
+	c := config.Get()
 	dsn := "host=" + c.GetString("pg.host") +
 		" user=" + c.GetString("pg.user") +
 		" password=" + c.GetString("pg.pass") +
 		" dbname=" + c.GetString("pg.name") +
 		" sslmode=require"
-	var err error
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
+	conn, err := gorm.Open(postgres.Open(dsn))
 	if err != nil {
-		return
+		log.Fatal().Err(err).Send()
 	}
+
+	db = conn
 }
 
-func GetDB() *gorm.DB {
+func Get() *gorm.DB {
 	return db
 }

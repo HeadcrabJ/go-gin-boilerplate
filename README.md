@@ -1,7 +1,7 @@
 # Go Gin Boilerplate
 > A starter project with Golang, Gin, JWT authentication, Swagger, PostgreSQL and Redis
 
-![License](https://img.shields.io/github/license/HeadcrabJ/go-gin-boilerplate)
+![License](https://img.shields.io/github/license/dajeo/go-gin-boilerplate)
 
 Supports multiple configuration environments.
 
@@ -14,18 +14,20 @@ Supports multiple configuration environments.
 │   ├── dev.yml
 │   └── production.yml
 ├── controllers
-│   └── user.go
+│   ├── health.go
+│   └── users.go
 ├── db
-│   ├── db.go
-│   └── redis.go
-├── main.go
+│   └── db.go
 ├── middlewares
 │   └── auth.go
 ├── models
 │   └── user.go
-└── server
-    ├── router.go
-    └── server.go
+├── rdb
+│   └── rdb.go
+├── server
+│   ├── router.go
+│   └── server.go
+└── main.go
 ```
 
 ## License

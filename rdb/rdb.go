@@ -1,14 +1,14 @@
-package db
+package rdb
 
 import (
-	"github.com/HeadcrabJ/go-gin-boilerplate/config"
+	"github.com/dajeo/go-gin-boilerplate/config"
 	"github.com/go-redis/redis/v9"
 )
 
 var rdb *redis.Client
 
-func InitRedis() {
-	c := config.GetConfig()
+func Init() {
+	c := config.Get()
 	rdb = redis.NewClient(&redis.Options{
 		Addr:     c.GetString("redis.host"),
 		Password: c.GetString("redis.pass"),
@@ -16,6 +16,6 @@ func InitRedis() {
 	})
 }
 
-func GetRedis() *redis.Client {
+func Get() *redis.Client {
 	return rdb
 }

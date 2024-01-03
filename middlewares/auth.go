@@ -1,10 +1,10 @@
 package middlewares
 
 import (
-	"github.com/HeadcrabJ/go-gin-boilerplate/config"
-	"github.com/HeadcrabJ/go-gin-boilerplate/db"
-	"github.com/HeadcrabJ/go-gin-boilerplate/models"
 	jwt "github.com/appleboy/gin-jwt/v2"
+	"github.com/dajeo/go-gin-boilerplate/config"
+	"github.com/dajeo/go-gin-boilerplate/db"
+	"github.com/dajeo/go-gin-boilerplate/models"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"time"
@@ -13,7 +13,7 @@ import (
 var auth *jwt.GinJWTMiddleware
 
 func InitJWT() {
-	c := config.GetConfig()
+	c := config.Get()
 	var authErr error
 	auth, authErr = jwt.New(&jwt.GinJWTMiddleware{
 		Realm:       "realm",
@@ -45,7 +45,7 @@ func InitJWT() {
 			userPass := loginVals.Password
 
 			var user models.User
-			db.GetDB().First(&user, "tel = ?", userTel)
+			db.Get().First(&user, "tel = ?", userTel)
 
 			if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(userPass)) == nil {
 				return &models.UserRes{
